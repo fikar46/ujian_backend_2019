@@ -154,4 +154,16 @@ app.post('/movcat-delete/:id',(req,res)=>{
         console.log(result)
     })
 })
+app.get('/movcat-select' , (req,res) => {
+    var sql = `select 
+    mv.nama as nama_film, 
+    ctr.nama as nama_category
+    from movcat mc join movies mv on mc.idmovie = mv.id 
+    join categories ctr on mc.idcategory = ctr.id`
+    conn.query(sql ,(err,result)=>{
+        res.send(result)
+        console.log(result)
+    })
+})
+
 app.listen(port, () => console.log('API Aktif di port ' + port))
